@@ -19,7 +19,16 @@ class FactsArgs(object):
     def __init__(self, **kwargs):
         pass
 
-    choices = ["all", "!all", "interfaces", "!interfaces"]
+    choices = [
+        "all",
+        "!all",
+        "interfaces",
+        "!interfaces",
+        "l2_interfaces",
+        "!l2_interfaces",
+        "vlans",
+        "!vlans",
+    ]
 
     argument_spec = {
         "gather_subset": dict(default=["!config"], type="list"),
