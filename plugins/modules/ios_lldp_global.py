@@ -220,12 +220,12 @@ before:
   description: The configuration as structured data prior to module invocation.
   returned: always
   type: dict
-  sample: The configuration returned will alwys be in the same format of the paramters above.
+  sample: The configuration returned will always be in the same format of the parameters above.
 after:
   description: The configuration as structured data after module completion.
   returned: when changed
   type: dict
-  sample: The configuration returned will alwys be in the same format of the paramters above.
+  sample: The configuration returned will always be in the same format of the parameters above.
 commands:
   description: The set of commands pushed to the remote device
   returned: always
@@ -248,8 +248,15 @@ def main():
 
     :returns: the result form module invocation
     """
+    required_if = [
+        ("state", "merged", ("config",)),
+        ("state", "replaced", ("config",)),
+    ]
+
     module = AnsibleModule(
-        argument_spec=Lldp_globalArgs.argument_spec, supports_check_mode=True
+        argument_spec=Lldp_globalArgs.argument_spec,
+        required_if=required_if,
+        supports_check_mode=True,
     )
 
     result = Lldp_global(module).execute_module()
